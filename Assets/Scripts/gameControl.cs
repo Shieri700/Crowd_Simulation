@@ -116,7 +116,8 @@ public class gameControl : MonoBehaviour
         {
             //crowdXML.SerializeNode();
             //crowdXML.SerializeElement();
-            crowdXML.testS();
+            crowdXML.testS(GameObject.FindGameObjectsWithTag("Wall"));
+            //crowdXML.updateScene(GameObject.FindGameObjectsWithTag("Wall"));
         }
         crowdXML.closeS();
 

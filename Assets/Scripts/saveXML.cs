@@ -71,7 +71,7 @@ namespace crowdxml
             x.Serialize(writerB, bfsm);
         }
 
-        public void testS()
+        public void testS(GameObject[] walls)
         {
             Experiment e = new Experiment();
             e.version = 2;
@@ -109,10 +109,42 @@ namespace crowdxml
             Vertex_scene[] vertices = { v0, v1, v2, v3 };
             obstacle0.vertices = vertices;
             Obstacle[] obstacles = { obstacle0 };
-            e.obstacleSet.obstacles = obstacles;
+            //e.obstacleSet.obstacles = obstacles;
+            e.obstacleSet.obstacles = getObstacles(walls);
 
             XmlSerializer x = new XmlSerializer(e.GetType());
             x.Serialize(writerS, e);
+        }
+
+        public Obstacle[] getObstacles(GameObject[] walls)
+        {
+            Obstacle[] obstacles = new Obstacle[walls.Length];
+            for (int i = 0; i < walls.Length; i++)
+            {
+                obstacles[i] = new Obstacle();
+                obstacles[i].closed = 1;
+
+                Vector3 centre = walls[i].GetComponent<Renderer>().bounds.center;
+                float width = walls[i].GetComponent<Renderer>().bounds.size.x;
+                //float height = walls[i].GetComponent<Renderer>().bounds.size.y;
+                float depth = walls[i].GetComponent<Renderer>().bounds.size.z;
+
+                Vertex_scene v0 = new Vertex_scene();
+                v0.p_x = centre.x - width / 2.0f;
+                v0.p_y = centre.z - depth / 2.0f;
+                Vertex_scene v1 = new Vertex_scene();
+                v1.p_x = v0.p_x + width;
+                v1.p_y = v0.p_y;
+                Vertex_scene v2 = new Vertex_scene();
+                v2.p_x = v0.p_x + width;
+                v2.p_y = v0.p_y + depth;
+                Vertex_scene v3 = new Vertex_scene();
+                v3.p_x = v0.p_x;
+                v3.p_y = v0.p_y + depth;
+                Vertex_scene[] vertices = { v0, v1, v2, v3 };
+                obstacles[i].vertices = vertices;
+            }
+            return obstacles;
         }
 
     }
