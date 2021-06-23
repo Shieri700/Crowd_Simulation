@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Experiment xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2">
+  <SpatialQuery type="kd-tree" test_visibility="false" />
+  <Common time_step="0.1" />
+  <AgentProfile name="group1" />
+  <ObstacleSet type="explicit" class="1">
+    <Obstacle closed="1">
+      <Vertex p_x="1.333" p_y="1.333" />
+      <Vertex p_x="5.333" p_y="1.333" />
+      <Vertex p_x="5.333" p_y="5.333" />
+      <Vertex p_x="1.333" p_y="5.333" />
+    </Obstacle>
+  </ObstacleSet>
+</Experiment>

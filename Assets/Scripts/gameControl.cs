@@ -112,12 +112,21 @@ public class gameControl : MonoBehaviour
     public void generateXML()
     {
         crowdxml.saveXML crowdXML = new crowdxml.saveXML();
-        crowdXML.start("mengeXML/tttest.xml");
+        crowdXML.startS("mengeXML/testS.xml");
         {
             //crowdXML.SerializeNode();
             //crowdXML.SerializeElement();
-            crowdXML.test();
+            crowdXML.testS();
         }
-        crowdXML.close();
+        crowdXML.closeS();
+
+        crowdXML.startB("mengeXML/testB.xml");
+        {
+            //crowdXML.SerializeNode();
+            //crowdXML.SerializeElement();
+            crowdXML.testB();
+        }
+        crowdXML.closeB();
+        Debug.Log("Finish update");
     }
 }
