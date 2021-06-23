@@ -49,4 +49,8 @@ namespace sceneXML
         [XmlElement("test_visibility")]
         public bool testVisibility;
     }
+
+    /////////////////////////////////////
+    /// AgentGroup
+    /////////////////////////////////////
 }
