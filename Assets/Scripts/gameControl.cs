@@ -16,10 +16,22 @@ public class gameControl : MonoBehaviour
         Play
     }
 
+    /// <summary>
+    /// Game controls
+    /// </summary>
     game_mode gameMode;
+    UnityEngine.Vector2 agentStartPos;
+    UnityEngine.Vector2 agentEndPos;
+    int agentSzie;
+
+    /// <summary>
+    /// Game objects
+    /// </summary>
     GameObject modeButtonText;
 
     public GameObject PedestrianModel;
+    public GameObject agentStartPlane;
+    public GameObject agentEndPlane;
     private MengeCS.Simulator _sim;
     private List<GameObject> _objects = new List<GameObject>();
     private bool _sim_is_valid = false;
@@ -29,6 +41,7 @@ public class gameControl : MonoBehaviour
     {
         gameMode = game_mode.Edit;
         modeButtonText = GameObject.Find("ModeText");
+        agentStartPos = new UnityEngine.Vector2(agentStartPlane.transform.position.x, agentStartPlane.transform.position.z);
     }
 
     // Update is called once per frame
@@ -109,6 +122,19 @@ public class gameControl : MonoBehaviour
         }
     }
 
+    public void updateAgentStart()
+    {
+        agentStartPos = gameObject.GetComponent<AgentStart>().getPos();
+        agentSzie = gameObject.GetComponent<AgentStart>().getSize();
+        agentStartPlane.transform.position = new UnityEngine.Vector3(agentStartPos.x, agentStartPlane.transform.position.y, agentStartPos.y);
+    }
+
+    public void updateAgentEnd()
+    {
+        agentEndPos = gameObject.GetComponent<AgentStart>().getPosEnd();
+        agentEndPlane.transform.position = new UnityEngine.Vector3(agentEndPos.x, agentEndPlane.transform.position.y, agentEndPos.y);
+    }
+
     public void generateXML()
     {
         crowdxml.saveXML crowdXML = new crowdxml.saveXML();
@@ -116,7 +142,7 @@ public class gameControl : MonoBehaviour
         {
             //crowdXML.SerializeNode();
             //crowdXML.SerializeElement();
-            crowdXML.testS(GameObject.FindGameObjectsWithTag("Wall"));
+            crowdXML.testS(GameObject.FindGameObjectsWithTag("Wall"), agentStartPos, agentSzie);
             //crowdXML.updateScene(GameObject.FindGameObjectsWithTag("Wall"));
         }
         crowdXML.closeS();
@@ -125,7 +151,7 @@ public class gameControl : MonoBehaviour
         {
             //crowdXML.SerializeNode();
             //crowdXML.SerializeElement();
-            crowdXML.testB();
+            crowdXML.testB(agentEndPos);
         }
         crowdXML.closeB();
         Debug.Log("Finish update");

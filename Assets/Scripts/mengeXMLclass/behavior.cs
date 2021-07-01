@@ -9,11 +9,45 @@ namespace behaviorXML
 {
     public class BFSM
     {
+        [XmlElement("GoalSet")]
+        public GoalSet goalSet;
+
         [XmlElement("State")]
         public StateClass[] State;
 
         [XmlElement("Transition")]
         public Trans transition;
+    }
+
+    public class GoalSet
+    {
+        [XmlAttribute("id")]
+        public int id;
+
+        [XmlElement("Goal")]
+        public Goal[] goals;
+    }
+
+
+    public class Goal
+    {
+        [XmlAttribute("capacity")]
+        public int capacity;
+
+        [XmlAttribute("id")]
+        public int id;
+
+        [XmlAttribute("type")]
+        public string type;
+
+        [XmlAttribute("weight")]
+        public float weight;
+
+        [XmlAttribute("x")]
+        public float x;
+
+        [XmlAttribute("y")]
+        public float y;
     }
 
     public class StateClass
@@ -23,24 +57,31 @@ namespace behaviorXML
         [XmlAttribute]
         public int final;
 
-        public Goal GoalSelector;
+        [XmlElement("GoalSelector")]
+        public GoalSelector GoalSelector;
         public Vel VelComponent;
     }
 
-    public class Goal
+    public class GoalSelector
     {
         [XmlAttribute]
         public string type;
-        [XmlAttribute]
-        public int mirror_x;
-        [XmlAttribute]
-        public int mirror_y;
+        [XmlAttribute("goal_set")]
+        public int goal_set;
+        [XmlAttribute("goal")]
+        public int goal;
     }
 
     public class Vel
     {
-        [XmlAttribute]
+        [XmlAttribute("type")]
         public string type;
+
+        [XmlAttribute("weight")]
+        public float weight;
+
+        [XmlAttribute("file_name")]
+        public string filename;
     }
 
     public class Trans

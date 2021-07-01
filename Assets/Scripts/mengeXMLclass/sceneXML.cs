@@ -32,7 +32,7 @@ namespace sceneXML
         public AgentProfile[] agentProfiles;
 
         [XmlElement("AgentGroup")]
-        public AgentGroup[] agentGroup;
+        public AgentGroup[] agentGroups;
 
         [XmlElement("ObstacleSet")]
         public ObstacleSet obstacleSet;
@@ -68,7 +68,7 @@ namespace sceneXML
         public StateSelector stateSelector;
 
         [XmlElement("Generator")]
-        public Generator[] generator;
+        public Generator generator;
     }
 
     public class ProfileSelector

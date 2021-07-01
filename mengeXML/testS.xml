@@ -3,6 +3,11 @@
   <SpatialQuery type="kd-tree" test_visibility="false" />
   <Common time_step="0.1" />
   <AgentProfile name="group1" />
+  <AgentGroup>
+    <ProfileSelector type="const" name="group1" />
+    <StateSelector type="const" name="walk" />
+    <Generator type="rect_grid" anchor_x="-21.1601181" anchor_y="2.93918967" offset_x="-0.1" offset_y="-0.1" count_x="2" count_y="23" />
+  </AgentGroup>
   <ObstacleSet type="explicit" class="1">
     <Obstacle closed="1">
       <Vertex p_x="-26" p_y="-8" />
